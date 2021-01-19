@@ -1,13 +1,21 @@
+import os #operating system (作業系統模組) 先載入才可詢問中央
+
 #讀取檔案
 products = []
-with open('products.csv', 'r', encoding= 'utf-8') as f:
-	for line in f:
-		if '商品,價格' in line:
-			continue #continue為'跳過此回繼續下一回for loop'
-		name, price = line.strip().split(',') #split做分割後各項目為'清單'
-		products.append([name, price])
-print(products)
+if os.path.isfile('products.csv'):#檢查檔案是否存在
+	print('找到檔案了!!')
+	with open('products.csv', 'r', encoding='utf_8') as f:
+		for line in f:
+			if '商品,價格' in line:
+				continue #跳過此回合到下一個for loop
+			name, price = line.strip().split(',')
+			products.append([name, price])
+	print(products)
+    
+else:
+	print('找不到檔案...')
 
+#讓使用者輸入
 while True:
 	name = input('請輸入商品名稱: ')
 	if name == 'q':
